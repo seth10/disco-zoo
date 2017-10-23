@@ -133,4 +133,10 @@ def findPatterns(animals):
                         grid[y+iy][x+ix] += 1
     return grid
 
-for row in findPatterns([findAnimal('Sheep')]): print row
+
+animals = []
+while True:
+    animalName = raw_input()
+    animals.append(findAnimal(animalName))
+    gridResult = findPatterns(animals)
+    for row in gridResult: print row

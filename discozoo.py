@@ -130,7 +130,8 @@ def findPatterns(animals):
             for x in range(5 - len(animal[0]) + 1):
                 for iy in range(len(animal)):
                     for ix in range(len(animal[0])):
-                        grid[y+iy][x+ix] += 1
+                        if animal[iy][ix]:
+                            grid[y+iy][x+ix] += 1
     return grid
 
 

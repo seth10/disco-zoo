@@ -81,7 +81,15 @@ patterns = {
 
 grid = [[0]*5 for _ in range(5)]
 
-animals = [patterns['T-Rex'], patterns['Triceratops']]
+def findAnimal(animal):
+    animalNames = [key for key in patterns]
+    animalPatterns = [patterns[animalName] for animalName in animalNames]
+    while animal not in animalNames:
+        longestAnimalName = max(animalNames, key=len)
+        animalNames = map(lambda animalName: animalName[:len(longestAnimalName)-1], animalNames)
+    return animalPatterns[animalNames.index(animal)]
+
+animals = map(findAnimal, ['T-Rex', 'Tric'])
 for animal in animals:
     for y in range(5 - len(animal) + 1):
         for x in range(5 - len(animal[0]) + 1):

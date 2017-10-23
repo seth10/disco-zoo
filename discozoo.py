@@ -115,8 +115,6 @@ patterns = {
 # Mars
 }
 
-grid = [[0]*5 for _ in range(5)]
-
 def findAnimal(animal):
     animalNames = [key for key in patterns]
     animalPatterns = [patterns[animalName] for animalName in animalNames]
@@ -125,11 +123,14 @@ def findAnimal(animal):
         animalNames = map(lambda animalName: animalName[:len(longestAnimalName)-1], animalNames)
     return animalPatterns[animalNames.index(animal)]
 
-animals = map(findAnimal, ['T-Rex', 'Tric'])
-for animal in animals:
-    for y in range(5 - len(animal) + 1):
-        for x in range(5 - len(animal[0]) + 1):
-            for iy in range(len(animal)):
-                for ix in range(len(animal[0])):
-                    grid[y+iy][x+ix] += 1
-for row in grid: print row
+def findPatterns(animals):
+    grid = [[0]*5 for _ in range(5)]
+    for animal in animals:
+        for y in range(5 - len(animal) + 1):
+            for x in range(5 - len(animal[0]) + 1):
+                for iy in range(len(animal)):
+                    for ix in range(len(animal[0])):
+                        grid[y+iy][x+ix] += 1
+    return grid
+
+for row in findPatterns([findAnimal('Sheep')]): print row

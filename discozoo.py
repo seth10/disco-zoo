@@ -158,14 +158,15 @@ def addAnimalToGrid(y, x, animal, chancesGrid):
                 chancesGrid[y+iy][x+ix] += 1
     return chancesGrid
 
-
 grid = [[0]*5 for _ in range(5)]
 chancesGrid = [[0]*5 for _ in range(5)]
-animals = map(findAnimal, ['tidd', 'pLAT'])
-grid[2][2] = -1
-grid[3][2] = 2
-grid[3][1] = -1
-grid[1][2] = 6
+animals = []
+animal = None
+while animal != '':
+    animal = raw_input()
+    if animal == '': break
+    animals.append(findAnimal(animal))
+    for row in animals[-1]: print row
 
 for animal in animals:
     numberToFind = filter(lambda n: n!=0, animal[0])[0]

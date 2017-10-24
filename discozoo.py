@@ -172,5 +172,10 @@ for animal in animals:
         for x in range(5 - len(animal[0]) + 1):
             if checkPossiblePatternPosition(y, x, animal, grid, numberToFind):
                 chancesGrid = addAnimalToGrid(y, x, animal, chancesGrid)
-            
-for row in chancesGrid: print row
+ 
+for y in range(5):
+    for x in range(5):
+        if grid[y][x] > 0:
+            chancesGrid[y][x] = float('inf')
+
+for row in chancesGrid: print ('{:^3} '*5).format(*row)

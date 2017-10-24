@@ -118,10 +118,10 @@ patterns = {
 def findAnimal(animal):
     animalNames = [key for key in patterns]
     animalPatterns = [patterns[animalName] for animalName in animalNames]
-    while animal not in animalNames:
+    while animal.title() not in animalNames:
         longestAnimalName = max(animalNames, key=len)
         animalNames = map(lambda animalName: animalName[:len(longestAnimalName)-1], animalNames)
-    return animalPatterns[animalNames.index(animal)]
+    return animalPatterns[animalNames.index(animal.title())]
 
 def findPatterns(animals):
     grid = [[0]*5 for _ in range(5)]
@@ -161,10 +161,11 @@ def addAnimalToGrid(y, x, animal, chancesGrid):
 
 grid = [[0]*5 for _ in range(5)]
 chancesGrid = [[0]*5 for _ in range(5)]
-animals = map(findAnimal, ['Bear', 'Beaver'])
+animals = map(findAnimal, ['tidd', 'pLAT'])
 grid[2][2] = -1
-grid[2][3] = -1
-grid[2][1] = 1
+grid[3][2] = 2
+grid[3][1] = -1
+grid[1][2] = 6
 
 for animal in animals:
     numberToFind = filter(lambda n: n!=0, animal[0])[0]

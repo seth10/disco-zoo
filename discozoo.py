@@ -158,6 +158,16 @@ def addAnimalToGrid(y, x, animal, chancesGrid):
                 chancesGrid[y+iy][x+ix] += 1
     return chancesGrid
 
+def printPattern(animal):
+    for row in animal:
+        print (u'{}'*len(row)).format(*map(lambda n: unichr(9679) if n != 0 else ' ', row))
+
+def printChancesGrid(grid):
+    mostChances = max(sum(chancesGrid,[]))
+    for row in grid:
+        print (u'{}'*len(row)).format(*map(lambda n: unichr(9679) if n == mostChances else ' ', row))
+
+
 grid = [[0]*5 for _ in range(5)]
 chancesGrid = [[0]*5 for _ in range(5)]
 animals = []
@@ -166,7 +176,11 @@ while animal != '':
     animal = raw_input()
     if animal == '': break
     animals.append(findAnimal(animal))
-    for row in animals[-1]: print row
+    printPattern(animals[-1])
+
+
+grid[2][2] = -1
+
 
 for animal in animals:
     numberToFind = filter(lambda n: n!=0, animal[0])[0]
@@ -174,7 +188,9 @@ for animal in animals:
         for x in range(5 - len(animal[0]) + 1):
             if checkPossiblePatternPosition(y, x, animal, grid, numberToFind):
                 chancesGrid = addAnimalToGrid(y, x, animal, chancesGrid)
- 
+
+printChancesGrid(chancesGrid)
+
 for y in range(5):
     for x in range(5):
         if grid[y][x] > 0:

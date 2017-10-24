@@ -160,12 +160,12 @@ def addAnimalToGrid(y, x, animal, chancesGrid):
 
 def printPattern(animal):
     for row in animal:
-        print (u'{}'*len(row)).format(*map(lambda n: unichr(9679) if n != 0 else ' ', row))
+        print (u'{}'*len(row)).format(*map(lambda n: unichr(9679 if n != 0 else 9675), row))
 
 def printChancesGrid(grid):
     mostChances = max(sum(chancesGrid,[]))
     for row in grid:
-        print (u'{}'*len(row)).format(*map(lambda n: unichr(9679) if n == mostChances else ' ', row))
+        print (u'{}'*len(row)).format(*map(lambda n: unichr(9679 if n == mostChances else 9675), row))
 
 
 grid = [[0]*5 for _ in range(5)]

@@ -134,7 +134,6 @@ def findPatterns(animals):
                             grid[y+iy][x+ix] += 1
     return grid
 
-
 # check that there aren't any -1 in this possible pattern location,
 # and that there aren't any matching numbers outside of this location
 def checkPossiblePatternPosition(ay, ax, animal, grid, numberToFind):
@@ -147,8 +146,9 @@ def checkPossiblePatternPosition(ay, ax, animal, grid, numberToFind):
         for x in range(5):
             if animalOnGrid[y][x]:
                 if grid[y][x] == -1: return False # one of the cells in this possible pattern position is known to be empty
+                if grid[y][x] > 0 and grid[y][x] != numberToFind: return False # a cell of another animal is contained here
             else:
-                if grid[y][x] == numberToFind: return False # a cell of the animal has been found outside of this pattern position
+                if grid[y][x] == numberToFind: return False # a cell of the animal has been found outside of this position
     return True
 
 def addAnimalToGrid(y, x, animal, chancesGrid):
@@ -161,8 +161,10 @@ def addAnimalToGrid(y, x, animal, chancesGrid):
 
 grid = [[0]*5 for _ in range(5)]
 chancesGrid = [[0]*5 for _ in range(5)]
-animals = [findAnimal('Seal')]
-grid[2][2] = 2 # known seal tile in center
+animals = map(findAnimal, ['Bear', 'Beaver'])
+grid[2][2] = -1
+grid[2][3] = -1
+grid[2][1] = 1
 
 for animal in animals:
     numberToFind = filter(lambda n: n!=0, animal[0])[0]
